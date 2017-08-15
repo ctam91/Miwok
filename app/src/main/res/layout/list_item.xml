@@ -8,13 +8,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/miwok_text_view"
-        tools:text="lutti"/>
+        android:id="@+id/miwok_text_view" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="one"
         android:id="@+id/default_text_view"/>
 
 </LinearLayout>
