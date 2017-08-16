@@ -8,15 +8,29 @@ package com.example.android.miwok;
 public class Word {
     private String mDefaultTranslation;
     private String mMiwokTranslation;
-
+    private int mImageResourceId;
+    private boolean mHasImage = false;
     /**
-     * Class constructor
+     * Class constructor that takes in two parameters
      * @param defaultTranslation is the default word user is trying to translate
      * @param miwokTranslation is the miwok word user is trying to translate
      */
     public Word(String defaultTranslation, String miwokTranslation){
         mDefaultTranslation = defaultTranslation;
         mMiwokTranslation = miwokTranslation;
+    }
+
+    /**
+     * Class constructor that takes in three parameters
+     * @param defaultTranslation is the word that the user is trying to translate
+     * @param miwokTranslation is the Miwok word the user is trying to translate
+     * @param imageResourceId the image associated with the word
+     */
+    public Word(String defaultTranslation, String miwokTranslation, int imageResourceId){
+        this.mDefaultTranslation = defaultTranslation;
+        this.mMiwokTranslation = miwokTranslation;
+        this.mImageResourceId = imageResourceId;
+        mHasImage = true;
     }
 
     /**
@@ -31,7 +45,15 @@ public class Word {
      * Get the Miwok translation of word
      * @return return the Miwok translation
      */
-    public String getmMiwokTranslation(){
+    public String getMiwokTranslation(){
         return mMiwokTranslation;
+    }
+
+    public int getImageResourceId(){
+        return mImageResourceId;
+    }
+
+    public boolean hasImage(){
+        return mHasImage;
     }
 }
