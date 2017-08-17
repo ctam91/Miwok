@@ -9,7 +9,9 @@ public class Word {
     private String mDefaultTranslation;
     private String mMiwokTranslation;
     private int mImageResourceId;
+    private int mAudioId;
     private boolean mHasImage = false;
+
     /**
      * Class constructor that takes in two parameters
      * @param defaultTranslation is the default word user is trying to translate
@@ -21,15 +23,27 @@ public class Word {
     }
 
     /**
+     * Class constructor that takes in two parameters
+     * @param defaultTranslation is the default word user is trying to translate
+     * @param miwokTranslation is the miwok word user is trying to translate
+     */
+    public Word(String defaultTranslation, String miwokTranslation, int audioId){
+        mDefaultTranslation = defaultTranslation;
+        mMiwokTranslation = miwokTranslation;
+        mAudioId = audioId;
+    }
+
+    /**
      * Class constructor that takes in three parameters
      * @param defaultTranslation is the word that the user is trying to translate
      * @param miwokTranslation is the Miwok word the user is trying to translate
      * @param imageResourceId the image associated with the word
      */
-    public Word(String defaultTranslation, String miwokTranslation, int imageResourceId){
+    public Word(String defaultTranslation, String miwokTranslation, int imageResourceId, int audioId){
         this.mDefaultTranslation = defaultTranslation;
         this.mMiwokTranslation = miwokTranslation;
         this.mImageResourceId = imageResourceId;
+        this.mAudioId = audioId;
         mHasImage = true;
     }
 
@@ -55,5 +69,9 @@ public class Word {
 
     public boolean hasImage(){
         return mHasImage;
+    }
+
+    public int getAudioId(){
+        return mAudioId;
     }
 }
