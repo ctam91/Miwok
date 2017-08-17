@@ -3,6 +3,7 @@ package com.example.android.miwok;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 
 public class WordAdapter extends ArrayAdapter<Word> {
 
-
+    private int mResourceId;
     /**
      * Class Constructor
      *
@@ -29,10 +30,12 @@ public class WordAdapter extends ArrayAdapter<Word> {
      *                "super()" is used to modify the superclass constructor, which is:
      *                ArrayAdapter(Context context, int resource id, List<T> objects)
      *                We can pass in '0' because we are inflating the layout ourselves
+     *    @param resourceId the color of the background
      */
 
-    public WordAdapter(Activity context, ArrayList<Word> words) {
+    public WordAdapter(Activity context, ArrayList<Word> words, int resourceId) {
         super(context, 0, words);
+        mResourceId = resourceId;
     }
 
     /**
@@ -57,14 +60,18 @@ public class WordAdapter extends ArrayAdapter<Word> {
         }
         // getItem is a method from the superclass, it returns the position of the word
         Word currentWord = getItem(position);
+        int color = ContextCompat.getColor(getContext(), mResourceId);
 
         // create a Textview to display Miwok Translation
         TextView miwokTextView = (TextView) listItemView.findViewById(R.id.miwok_text_view);
         miwokTextView.setText(currentWord.getMiwokTranslation());
+        miwokTextView.setBackgroundColor(color);
 
         // Create a TextView to display default translation
         TextView defaultTextView = (TextView) listItemView.findViewById(R.id.default_text_view);
         defaultTextView.setText(currentWord.getDefaultTranslation());
+        defaultTextView.setBackgroundColor(mResourceId);
+        defaultTextView.setBackgroundColor(color);
 
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.image_view);
         if (currentWord.hasImage()) {
