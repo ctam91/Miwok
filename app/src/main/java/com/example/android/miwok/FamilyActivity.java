@@ -39,8 +39,8 @@ public class FamilyActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Word word_position = (Word) listView.getItemAtPosition(position);
-                int audio = word_position.getAudioId();
+                Word word = words.get(position);
+                int audio = word.getAudioId();
                 mMediaPlayer = MediaPlayer.create(FamilyActivity.this,audio);
                 mMediaPlayer.start();
             }

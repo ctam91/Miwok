@@ -55,14 +55,26 @@ public class Word {
         return mMiwokTranslation;
     }
 
+    /**
+     * Gets the image resource id
+     * @return image id
+     */
     public int getImageResourceId(){
         return mImageResourceId;
     }
 
+    /**
+     * Checks to see if a word has an image
+     * @return true or false if word has image
+     */
     public boolean hasImage(){
         return mHasImage;
     }
 
+    /**
+     * Gets the audio resource id
+     * @return the audio id
+     */
     public int getAudioId(){
         return mAudioId;
     }
