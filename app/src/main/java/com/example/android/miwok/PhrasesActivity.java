@@ -1,5 +1,7 @@
 package com.example.android.miwok;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +11,32 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import static android.media.AudioManager.AUDIOFOCUS_GAIN;
+import static android.media.AudioManager.AUDIOFOCUS_LOSS;
+import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
+import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK;
+
 public class PhrasesActivity extends AppCompatActivity {
 
     private MediaPlayer mMediaPlayer;
+    private AudioManager mAudioManager;
+
+    private AudioManager.OnAudioFocusChangeListener audioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener(){
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            if(focusChange == AUDIOFOCUS_GAIN){
+                mMediaPlayer.start();
+            }
+            else if(focusChange == AUDIOFOCUS_LOSS_TRANSIENT | focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK){
+                mMediaPlayer.pause();
+                mMediaPlayer.seekTo(0);
+            }
+            else if(focusChange == AUDIOFOCUS_LOSS){
+                mMediaPlayer.stop();
+                releaseMediaPlayer();
+            }
+        }
+    };
 
     /**
      * This listener gets triggered when the {@link MediaPlayer} has completed
@@ -28,6 +53,10 @@ public class PhrasesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phrases);
+
+        // Initialize field 'mAudioManager' as a new AudioManager
+        // Instances of this class must be obtained using Context.getSystemService(String) with the argument Context.AUDIO_SERVICE.
+        mAudioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
 
         final ArrayList<Word> words = new ArrayList<Word>();
 
@@ -56,12 +85,16 @@ public class PhrasesActivity extends AppCompatActivity {
                 // play a different sound file
                 releaseMediaPlayer();
 
-                mMediaPlayer = MediaPlayer.create(PhrasesActivity.this,audio);
-                mMediaPlayer.start();
+                int result = mAudioManager.requestAudioFocus(audioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
-                // Setup a listener on the media player, so that we can stop and release the
-                // media player once the sound has finished playing.
-                mMediaPlayer.setOnCompletionListener(mCompletionListener);
+                if(result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    mMediaPlayer = MediaPlayer.create(PhrasesActivity.this, audio);
+                    mMediaPlayer.start();
+
+                    // Setup a listener on the media player, so that we can stop and release the
+                    // media player once the sound has finished playing.
+                    mMediaPlayer.setOnCompletionListener(mCompletionListener);
+                }
             }
         });
 
@@ -91,6 +124,8 @@ public class PhrasesActivity extends AppCompatActivity {
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.
             mMediaPlayer = null;
+
+            mAudioManager.abandonAudioFocus(audioFocusChangeListener);
         }
     }
 
