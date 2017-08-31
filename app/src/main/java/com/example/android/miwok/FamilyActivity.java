@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +12,11 @@ import java.util.ArrayList;
 
 public class FamilyActivity extends AppCompatActivity {
 
+    // Create MediaPlayer member variable
     private MediaPlayer mMediaPlayer;
+
+    // Create AudioManager member variable
+    private AudioManager audioManager;
 
     /**
      * This listener gets triggered when the {@link MediaPlayer} has completed
@@ -29,6 +34,8 @@ public class FamilyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family);
+
+        // Initialize
 
         final ArrayList<Word> words = new ArrayList<Word>();
 

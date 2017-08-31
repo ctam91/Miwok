@@ -21,6 +21,10 @@ public class PhrasesActivity extends AppCompatActivity {
     private MediaPlayer mMediaPlayer;
     private AudioManager mAudioManager;
 
+    /**
+     * Creates OnAudioFocusChangeListener to check for AudioFocus
+     */
+
     private AudioManager.OnAudioFocusChangeListener audioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener(){
         @Override
         public void onAudioFocusChange(int focusChange) {
