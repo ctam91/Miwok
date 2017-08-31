@@ -48,7 +48,8 @@ public class NumbersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers);
 
-        am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        // initialize AudioManager
+        am = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
 
         final ArrayList <Word> words = new ArrayList<Word>();
 
