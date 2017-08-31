@@ -10,13 +10,14 @@
     <ImageView
         android:id="@+id/image_view"
         style="@style/ImageStyle"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/ic_launcher"
+        />
 
     <LinearLayout
         android:id="@+id/list_row"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height"
-        android:layout_weight="1"
+        android:layout_weight="3"
         android:orientation="vertical">
 
         <TextView
@@ -28,5 +29,10 @@
             style="@style/DefaultTextViewStyle" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/white_arrow"
+        style="@style/white_arrow_style"
+        android:src="@drawable/ic_play_arrow_white_24dp"/>
 
 </LinearLayout>

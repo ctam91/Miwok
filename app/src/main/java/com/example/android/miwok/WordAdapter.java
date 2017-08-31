@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.example.android.miwok.R.drawable.ic_play_arrow_white_24dp;
+import static com.example.android.miwok.R.id.white_arrow;
+
 /**
  * Created by tammy on 8/15/2017.
  */
@@ -72,6 +75,11 @@ public class WordAdapter extends ArrayAdapter<Word> {
         defaultTextView.setText(currentWord.getDefaultTranslation());
         defaultTextView.setBackgroundColor(mResourceId);
         defaultTextView.setBackgroundColor(color);
+
+        ImageView arrow = (ImageView) listItemView.findViewById(white_arrow);
+        arrow.setBackgroundColor(color);
+        arrow.setImageResource(ic_play_arrow_white_24dp);
+        arrow.setVisibility(View.VISIBLE);
 
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.image_view);
         if (currentWord.hasImage()) {
