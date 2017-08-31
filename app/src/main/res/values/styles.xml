@@ -65,7 +65,6 @@
     <!-- Style for White Play Button -->
     <style name="white_arrow_style">
         <item name="android:layout_height">88dp</item>
-        <item name="android:layout_weight">1</item>
         <item name="android:background">@color/category_numbers</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:paddingRight">16dp</item>
